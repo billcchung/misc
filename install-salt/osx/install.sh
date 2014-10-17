@@ -1,9 +1,9 @@
 #!/bin/bash
-# $1 for salt-master
+# $1 for salt-master, run as root
 salt-master=$1
 
-ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)”
-
+# install salt
+ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 brew install saltstack
 brew install swig
 brew install zmq
@@ -11,10 +11,12 @@ sudo pip install salt
 sudo pip install psutil
 sudo pip install --upgrade setuptools
 
+# salt-minion settings
 mkdir /etc/salt/
 curl -k -o /etc/salt/minion -O https://raw.githubusercontent.com/saltstack/salt/develop/conf/minion
 echo -e "master: $salt-master \nid: $(hostname -f)" >> /etc/salt/minion
 
+# start salt-minion on boot
 echo """
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
