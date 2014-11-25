@@ -9,6 +9,7 @@ brew install swig
 brew install zmq
 sudo pip install salt
 sudo pip install psutil
+sudo pip install requests
 sudo pip install --upgrade setuptools
 
 # salt-minion settings
