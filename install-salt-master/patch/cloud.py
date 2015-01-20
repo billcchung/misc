@@ -690,6 +690,8 @@ def validate_windows_cred(host, username='Administrator', password=None, retries
     '''
     Check if the windows credentials are valid
     '''
+    # wait for windows to really be ready..
+    time.sleep(240)
     for i in xrange(retries):
         retcode = win_cmd('winexe -U {0}%{1} //{2} "hostname"'.format(
             username, password, host
