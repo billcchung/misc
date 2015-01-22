@@ -691,7 +691,7 @@ def validate_windows_cred(host, username='Administrator', password=None, retries
     Check if the windows credentials are valid
     '''
     # wait for windows to really be ready..
-    time.sleep(240)
+    time.sleep(300)
     for i in xrange(retries):
         retcode = win_cmd('winexe -U {0}%{1} //{2} "hostname"'.format(
             username, password, host
@@ -886,9 +886,6 @@ def deploy_windows(host,
                 creds,
             ))
         # Shell out to winexe to ensure salt-minion service started
-        win_cmd('winexe {0} "sc stop salt-minion"'.format(
-            creds,
-        ))
         win_cmd('winexe {0} "sc start salt-minion"'.format(
             creds,
         ))
